@@ -1,13 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ImageBackground, StatusBar } from 'react-native';
 
-export default class App extends React.Component {
+export default class App extends Component {
+  state = {
+    isLoaded: false
+  };
   render() {
+    const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <StatusBar hidden = { true } />
+          { isLoaded ? (
+            <View>
+              <Text>loading complete</Text>
+            </View>
+          ) : (
+            <View style = {styles.loading}>
+              <ImageBackground
+                source = {require('./background.jpg')}
+                style = {{
+                  flex: 1,
+                  width: null,
+                  height: null
+                }}
+              />
+              <Text style = {styles.loadingText}>loading fail</Text>
+            </View>
+          )}
       </View>
     );
   }
@@ -16,8 +35,17 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff"
   },
+  loading: {
+    flex: 1,
+    justifyContent: "flex-end"
+  },
+  loadingText: {
+    fontSize: 40,
+    color: "white",
+    backgroundColor: "transparent",
+    alignItems: 'center',
+    paddingBottom: 40
+  }
 });
