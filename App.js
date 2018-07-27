@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, StatusBar } from 'react-native';
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  StatusBar
+} from "react-native";
 
 export default class App extends Component {
   state = {
@@ -9,24 +15,19 @@ export default class App extends Component {
     const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        <StatusBar hidden = { true } />
-          { isLoaded ? (
-            <View>
-              <Text>loading complete</Text>
-            </View>
-          ) : (
-            <View style = {styles.loading}>
-              <ImageBackground
-                source = {require('./background.jpg')}
-                style = {{
-                  flex: 1,
-                  width: null,
-                  height: null
-                }}
-              />
-              <Text style = {styles.loadingText}>loading fail</Text>
-            </View>
-          )}
+        <StatusBar backgroundColor="transparent" barStyle="light-content" />
+        {isLoaded ? (
+          <View>
+            <Text>loading complete</Text>
+          </View>
+        ) : (
+          <ImageBackground
+            source={require("./background.jpg")}
+            style={styles.loading}
+          >
+            <Text style={styles.loadingText}>Input your case</Text>
+          </ImageBackground>
+        )}
       </View>
     );
   }
@@ -39,13 +40,16 @@ const styles = StyleSheet.create({
   },
   loading: {
     flex: 1,
-    justifyContent: "flex-end"
+    width: null,
+    height: null,
+    justifyContent: "flex-end",
+    paddingBottom: 60
   },
   loadingText: {
     fontSize: 40,
+    fontWeight: "200",
     color: "white",
     backgroundColor: "transparent",
-    alignItems: 'center',
-    paddingBottom: 40
+    textAlign: "center"
   }
 });
