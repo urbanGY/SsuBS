@@ -15,7 +15,7 @@ export default class App extends Component {
 
   __onPressButton() {
     console.log("press button");
-    fetch('http://192.168.208.24:8081/text', {
+    fetch('http://10.27.12.30:3000/text', {
       method:'POST',
       headers: {
         Accept:'application/json',
@@ -35,6 +35,9 @@ export default class App extends Component {
       console.error(error);
     });
   }
+  __nextPage() {
+      console.log("touch peach!");
+  }
 
   render() {
     const { isLoaded } = this.state;
@@ -47,9 +50,18 @@ export default class App extends Component {
           </View>
         ) : (
           <ImageBackground
-            source={require("./background.jpg")}
+            source={require("./image/background.jpg")}
             style={styles.loading}
           >
+            <TouchableHighlight
+              onPress={this.__nextPage}
+              underlayColor="#E0115F"
+            >
+              <ImageBackground
+                source={require("./image/킹숭아.jpg")}
+                style={styles.peach}
+              />
+            </TouchableHighlight>
             <Text style={styles.loadingText}>Input your case</Text>
             <Button
               onPress = {this.__onPressButton}
@@ -74,6 +86,12 @@ const styles = StyleSheet.create({
     height: null,
     justifyContent: "flex-end",
     paddingBottom: 60
+  },
+  peach: {
+    width: 50,
+    height: 50,
+    marginBottom: 30,
+    alignItems: 'center'
   },
   loadingText: {
     fontSize: 40,
