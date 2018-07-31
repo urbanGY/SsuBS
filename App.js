@@ -4,6 +4,7 @@ import {
   Text,
   View,
   ImageBackground,
+  TouchableOpacity,
   Button,
   StatusBar
 } from "react-native";
@@ -36,41 +37,42 @@ export default class App extends Component {
     });
   }
   __nextPage() {
-      console.log("touch peach!");
+      console.log("touch cute peach!");
   }
 
   render() {
     const { isLoaded } = this.state;
     return (
-      <View style={styles.container}>
+      <ImageBackground
+        source={require("./image/background.jpg")}
+        style={styles.loading}
+      >
         <StatusBar backgroundColor="transparent" barStyle="light-content" />
         {isLoaded ? (
           <View>
             <Text>loading complete</Text>
           </View>
         ) : (
-          <ImageBackground
-            source={require("./image/background.jpg")}
-            style={styles.loading}
-          >
-            <TouchableHighlight
+          <View style={styles.container}>
+            <TouchableOpacity
               onPress={this.__nextPage}
-              underlayColor="#E0115F"
             >
               <ImageBackground
                 source={require("./image/킹숭아.jpg")}
                 style={styles.peach}
               />
-            </TouchableHighlight>
-            <Text style={styles.loadingText}>Input your case</Text>
+            </TouchableOpacity>
+
+              <Text style={styles.loadingText}>Input your case</Text>
+
             <Button
               onPress = {this.__onPressButton}
               title = "send post"
               color = "#841584"
             />
-          </ImageBackground>
+          </View>
         )}
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -78,20 +80,19 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    alignItems: 'center',
+    justifyContent: "flex-end"
   },
   loading: {
     flex: 1,
     width: null,
     height: null,
-    justifyContent: "flex-end",
     paddingBottom: 60
   },
   peach: {
-    width: 50,
-    height: 50,
-    marginBottom: 30,
-    alignItems: 'center'
+    width: 200,
+    height: 200,
+    marginBottom: 50
   },
   loadingText: {
     fontSize: 40,
