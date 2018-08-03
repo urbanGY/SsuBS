@@ -11,30 +11,30 @@ import {
 
 export default class App extends Component {
   state = {
-    isLoaded: false
+    isLoaded: false,
   };
 
   __onPressButton() {
     console.log("press button");
-    fetch('http://10.27.12.30:3000/text', {
-      method:'POST',
-      headers: {
-        Accept:'application/json',
-        'Content-Type':'application/json',
-      },
-      body: JSON.stringify({
-        text:'simple test text!',
-      }),
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-      var re = responseJson.returnText;
-      console.log("re : "+re);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+    // fetch('http://10.27.12.30:3000/text', {
+    //   method:'POST',
+    //   headers: {
+    //     Accept:'application/json',
+    //     'Content-Type':'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     text:'simple test text!',
+    //   }),
+    // })
+    // .then((response) => response.json())
+    // .then((responseJson) => {
+    //   console.log(responseJson);
+    //   var re = responseJson.returnText;
+    //   console.log("re : "+re);
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
   }
   __nextPage() {
       console.log("touch cute peach!");
@@ -70,7 +70,9 @@ export default class App extends Component {
               title = "send post"
               color = "#841584"
             />
+
           </View>
+
         )}
       </ImageBackground>
     );
