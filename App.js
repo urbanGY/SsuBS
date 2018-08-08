@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   Button,
   BackHandler,
+  TextInput,
   StatusBar
 } from "react-native";
 import SpeechAndroid from 'react-native-android-voice';
+//var SharedPreferences = require('react-native-shared-preferences');
 
 export default class App extends Component {
   constructor(props){
@@ -17,14 +19,17 @@ export default class App extends Component {
     this.__peachClick = this.__peachClick.bind(this);
     //this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     this.state ={
-      text: "default"
-      //touched: false
+      text: "default",
+      shared: "paste url"
     }
   }
+
   /*
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+
+    });
   }
+
 
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -74,7 +79,8 @@ export default class App extends Component {
         this.setState({
           text: spokenText
         });
-        fetch('http://192.168.0.5:8081/text', {
+        var url = this.state.shared;
+        fetch(url, {
           method:'POST',
           headers: {
             Accept:'application/json',
@@ -106,6 +112,11 @@ export default class App extends Component {
         style={styles.loading}>
         <StatusBar  barStyle="light-content" translucent={true} backgroundColor={'transparent'} />
         <View style={styles.container}>
+          <TextInput
+            style={styles.shared}
+            onChangeText={(shared) => this.setState({shared})}
+            value={this.state.shared}
+          />
           <Text style={styles.speak}>{this.state.text}</Text>
           <TouchableOpacity onPress={this.__peachClick}>
             <ImageBackground source={require("./image/킹숭아.png")} style={styles.peach}/>
@@ -132,7 +143,7 @@ const styles = StyleSheet.create({
   peach: {
     width: 250,
     height: 250,
-    marginBottom: 30
+    marginBottom: 20
   },
   loadingText: {
     fontSize: 40,
@@ -141,13 +152,21 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     textAlign: "center"
   },
+  shared: {
+    fontSize: 15,
+    fontWeight: "200",
+    color: "white",
+    backgroundColor: "transparent",
+    marginTop: 130,
+    marginBottom: 10
+  },
   speak: {
     fontSize: 20,
     fontWeight: "200",
     color: "white",
     backgroundColor: "transparent",
     textAlign: "center",
-    marginBottom: 110,
-    marginTop: 130
+    marginBottom: 70,
+    marginTop: 20
   }
 });
